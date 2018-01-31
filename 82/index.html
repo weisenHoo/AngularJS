@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+    <script src="../org/angular-ui-router.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd">
+
+    <div ui-view=""></div>
+    <div ui-view="content"></div>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', ['ui.router']);
+
+    // 类似于够着函数，在起始时执行
+    m.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
+        // 默认路由
+        $urlRouterProvider.otherwise('/my');
+        // 定义路由规则
+        $stateProvider
+            .state('my', {
+                url: '/my',
+                views: {
+                    '@': {
+                        templateUrl: './view/my.html',
+                    },
+                    'content': {
+                        template: '欢迎来到后盾人！'
+                    },
+                },
+            })
+            .state('video', {
+                parent: 'my',
+                url: '/video',
+                views: {
+                    'son@my': {
+                        templateUrl: './view/video.html',
+                    },
+                    'content@': {
+                        template: '',
+                    },
+                },
+            })
+    }]);
+
+    m.controller('ctrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+
+
+    }]);
+
+</script>
+
+</body>
+</html>

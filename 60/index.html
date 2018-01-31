@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    {{name}}
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+        $scope.name = '60 服务server应用分析与使用场景';
+    }]);
+
+</script>
+
+</body>
+</html>

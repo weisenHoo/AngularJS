@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<!--绑定控制器-->
+<div ng-controller="ctrl">
+
+    {{name}}
+
+</div>
+
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        let arr = [0, 1, 2, 3, 4, 5, 6];
+        let obj = [
+            {name: "后盾网", url: "http://www.houdunwang.com"},
+            {name: "后盾网论坛", url: "http://bbs.houdunwang.com"},
+            {name: "后盾人", url: "http://www.houdunren.com"},
+        ];
+        console.log(angular.isArray(obj));// 是否为数组
+
+        console.log(angular.isDate(new Date()));// 是否是日期
+
+        let a;
+        console.log(angular.isDefined(a));// 是否定义
+
+        console.log(angular.isUndefined(a));// 是否没有定义
+
+        console.log(angular.isFunction(function () {}));// 是否是一个函数
+
+        console.log(angular.isNumber(123));// 是否为数字类型
+
+        console.log(angular.isString("123"));// 是否为字符串
+
+        console.log(angular.isObject({}));// 是否为对象
+
+        let body = document.getElementsByTagName("body").item(0);
+        console.log(angular.isElement(body));// 是否为元素
+
+        let f = 1;
+        let g = 1;
+        console.log(angular.equals(f, g));// 比较两个数据是否相等
+    }]);
+
+</script>
+
+</body>
+</html>

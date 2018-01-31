@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+    <script src="../org/angular-ui-router.min.js"></script>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul, ol, li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .content {
+            width: 1200px;
+            height: auto;
+            margin: 0px auto;
+        }
+
+        .content .top {
+            height: 30px;
+            margin-top: 10px;
+            background: #eee;
+        }
+
+        .content .top a {
+            display: block;
+            float: left;
+            width: auto;
+            line-height: 30px;
+            padding: 0px 30px;
+            color: #000;
+        }
+
+        .content .top a:hover {
+            color: #f00;
+        }
+
+        .content .left {
+            float: left;
+            width: 200px;
+            height: auto;
+            margin-top: 10px;
+            margin-right: 10px;
+            padding: 10px 0px;
+            background: #eee;
+        }
+
+        .content .left li {
+            line-height: 30px;
+            padding-left: 15px;
+        }
+
+        .content .left li a {
+            color: #000;
+        }
+
+        .content .left li a:hover {
+            color: #f00;
+        }
+
+        .content .right{
+            float: left;
+            width: 970px;
+            height: auto;
+            background: #eee;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div ng-app="hd">
+
+    <div class="content">
+        <div ui-view="top"></div>
+        <div ui-view="left"></div>
+        <div ui-view="right"></div>
+    </div>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', ['ui.router']);
+
+    // 类似于够着函数，在起始时执行
+    m.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
+        // 默认路由
+        $urlRouterProvider.otherwise('/my');
+        // 定义路由规则
+        $stateProvider
+            .state('my', {
+                url: '/my',
+                views: {
+                    top: {
+                        templateUrl: './view/top.html',
+                    },
+                    left: {
+                        templateUrl: './view/my.html',
+                    },
+                    right: {
+                        templateUrl: './view/about.html',
+                    },
+                },
+            })
+            .state('video', {
+                url: '/video',
+                views: {
+                    top: {
+                        templateUrl: './view/top.html',
+                    },
+                    left: {
+                        templateUrl: './view/video.html',
+                    },
+                    right: {
+                        templateUrl: './view/video_lists.html',
+                    },
+                },
+            })
+    }]);
+
+    m.controller('ctrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+
+
+    }]);
+
+</script>
+
+</body>
+</html>

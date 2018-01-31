@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    <table border="1" width="600">
+        <tr>
+            <td ng-click="orderBy('id')">
+                编号
+                <span ng-if="status.id">⬆️</span>
+                <span ng-if="!status.id">⬇️</span>
+            </td>
+            <td ng-click="orderBy('click')">
+                点击数
+                <span ng-if="status.click">⬆️</span>
+                <span ng-if="!status.click">⬇️</span>
+            </td>
+            <td ng-click="orderBy('title')">
+                标题
+                <span ng-if="status.title">⬆️</span>
+                <span ng-if="!status.title">⬇️</span>
+            </td>
+            <td ng-click="orderBy('url')">
+                链接地址
+                <span ng-if="status.url">⬆️</span>
+                <span ng-if="!status.url">⬇️</span>
+            </td>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td ng-bind="v.id"></td>
+            <td ng-bind="v.click"></td>
+            <td ng-bind="v.title"></td>
+            <td ng-bind="v.url"></td>
+        </tr>
+    </table>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', '$filter', ($scope, $filter) => {
+
+        $scope.data = [
+            {id: 0, click: 100, title: "后盾网", url: "http://www.houdunwang.com"},
+            {id: 1, click: 300, title: "后盾网论坛", url: "http://bbs.houdunwang.com"},
+            {id: 2, click: 200, title: "后盾人", url: "http://www.houdunren.com"},
+        ];
+
+        // 记录排序的状态
+        $scope.status = {id: false, click: false, title: false, url: false};
+
+        $scope.orderBy = (field) => {
+            $scope.status[field] = !$scope.status[field];
+            $scope.data = $filter("orderBy")($scope.data, field, $scope.status[field]);
+        };
+
+    }]);
+
+</script>
+
+</body>
+</html>

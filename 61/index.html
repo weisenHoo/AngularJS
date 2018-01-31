@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    {{name}}
+    <hr>
+    <button ng-click="callback()">angular事件</button>
+    <hr>
+    <button id="bt">jquery事件</button>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+        $scope.name = '后盾人';
+        $scope.callback = () => {
+            $scope.name = "weisen";
+        };
+
+        // jquery事件
+        $('#bt').click(() => {
+            $scope.name = "http://www.houdunren.com";
+            $scope.$apply();
+        });
+    }]);
+
+</script>
+
+</body>
+</html>

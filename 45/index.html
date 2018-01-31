@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    {{name}}
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', '$filter', ($scope, $filter) => {
+
+        $scope.name = "SPA";
+
+    }]);
+
+</script>
+
+</body>
+</html>

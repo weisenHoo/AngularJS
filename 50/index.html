@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd">
+
+    <div hd-cms>HDPHP开源框架</div>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    // 指令是属于模块的，需要在模块下面定义
+    // 驼峰命名规范
+    m.directive('hdCms', [() => {
+        return {
+            // a attr  e element  c class
+            restrict: 'EAC',
+            // replace为true时，模板中必须有一个一级标签
+            replace: true,
+            // 把原来的HTML代码替换到模版的某一个位置
+            transclude: true,
+            // 不能与template同时使用
+            templateUrl: './view/hdcms.html',
+            // template: (elem, attr) => "<h1>后盾<div ng-transclude></div></h1>",
+        };
+    }]);
+
+</script>
+
+</body>
+</html>

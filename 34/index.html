@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    {{price|currency:"¥":2}}
+    <hr/>
+    {{price|number:1}}
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+
+        $scope.price = 3390.456;
+
+    }]);
+
+</script>
+
+</body>
+</html>

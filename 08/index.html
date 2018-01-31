@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<!--绑定控制器-->
+<div ng-controller="ctrl">
+
+    商品：<input type="text" name="title" ng-model="goods.title"><br>
+    价格：<input type="text" name="price" ng-model="goods.price" readonly><br>
+    数量：<input type="text" name="num" ng-model="goods.num"><br>
+    总价：<input type="text" name="num" ng-value="goods.price * goods.num" readonly><br>
+
+</div>
+
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        $scope.goods = {title: "后盾人视频", price: 699, num: 2};
+    }]);
+
+</script>
+
+</body>
+</html>

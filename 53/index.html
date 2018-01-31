@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    {{name}}<input type="text" ng-model="name">
+    <hr>
+    <div hdcms></div>
+    <hr>
+    <hdcms></hdcms>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.directive('hdcms', [() => {
+        return {
+            restrict: 'AEC',
+            // false 共享数据
+            // true 父子集关系，继承父级，子集可以有独立数据
+            // {} 完全独立
+            scope: true,
+            // template: '{{name}}',
+            template: '{{name}}<input type="text" ng-model="name">',
+        };
+    }]);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+        $scope.name = '后盾人';
+    }]);
+
+
+</script>
+
+</body>
+</html>

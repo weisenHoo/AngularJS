@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<!--绑定控制器-->
+<div ng-controller="ctrl">
+
+    <!--<input type="checkbox" ng-model="name">{{name}}<br/>-->
+    <!--<div ng-show="name">后盾人 人人做后盾！</div>-->
+    <!--<div ng-hide="name">后盾人 人人做后盾！</div>-->
+    <!--<div ng-if="name">后盾人 人人做后盾！</div>-->
+
+    <label><input type="checkbox" ng-model="status">接受协议</label>
+    <button ng-show="status" ng-init="copyright=false" ng-click="copyright=!copyright">查看协议</button>
+    <br/>
+    <textarea ng-if="copyright">协议内容：本视频由后盾人推出......!</textarea>
+    <br/>
+    <button ng-disabled="!status">登陆</button>
+
+</div>
+
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        $scope.name = false;
+    }]);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<!--绑定控制器-->
+<div ng-controller="ctrl">
+
+
+</div>
+
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        console.log(angular.version);// 显示版本号
+        console.log(angular.lowercase("Abc"));// 将字符串转换为小写形式
+        console.log(angular.uppercase("Abc"));// 将字符串转换为大写形式
+
+        var obj = {name: "后盾人"};
+        var obj2 = {};
+        angular.copy(obj, obj2);// 深拷贝一个对象或数组
+        obj2.name = "后盾网";
+        console.log(obj);
+        console.log(obj2);
+
+
+    }]);
+
+</script>
+
+</body>
+</html>

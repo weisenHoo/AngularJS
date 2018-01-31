@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd">
+
+    <!--继承隔离-->
+    <div ng-controller="ctrl1">
+        {{name}}
+        <input type="text" ng-model="name">
+        <div ng-controller="ctrl2">
+            {{name}}
+            <input type="text" ng-model="name">
+        </div>
+        <div ng-controller="ctrl2">
+            {{name}}
+        </div>
+    </div>
+
+    <!--使用对象，继承，但不隔离-->
+    <!--<div ng-controller="ctrl1">
+        {{data.name}}
+        <div ng-controller="ctrl2">
+            {{data.name}}
+            <input type="text" ng-model="data.name">
+        </div>
+        <div ng-controller="ctrl2">
+            {{data.name}}
+        </div>
+    </div>-->
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl1', ['$scope', ($scope) => {
+        $scope.name = '后盾人';
+//        $scope.data = {name: '后盾人'};
+    }]);
+
+    m.controller('ctrl2', ['$scope', ($scope) => {
+//        $scope.name = 'hdcms';
+    }]);
+
+    m.controller('ctrl2', ['$scope', ($scope) => {
+//        $scope.name = 'hdcms';
+    }]);
+
+    //    function run() {
+    //        var a = 1;
+    //        var f = function () {
+    //            a = 99;
+    //            alert(a);
+    //        };
+    //        f();
+    //    }
+    //
+    //    run();
+
+    //    let run = () => {
+    //        let a = 1;
+    //        let f = () => {
+    //            a = 99;
+    //            alert(a);
+    //        };
+    //        f();
+    //    };
+    //    run();
+
+</script>
+
+</body>
+</html>

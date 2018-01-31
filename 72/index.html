@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    <table border="1" width="600">
+        <tr>
+            <td align="center">编号</td>
+            <td>标题</td>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td align="center">{{v.aid}}</td>
+            <td>{{v.title}}</td>
+        </tr>
+    </table>
+
+</div>
+
+<script>
+
+    function a() {
+        this.name = '后盾人';
+        this.url = 'www.houdunren.com';
+    }
+    let obj = new a();
+    console.log(obj);
+
+    var m = angular.module('hd', []);
+
+    // 定义服务
+    m.service('videoServer', ['$http', function ($http) {
+
+        this.get = () => {
+            return $http({method: 'get', url: '1.php'}).then((response) => {
+                return response.data
+            });
+        };
+
+    }]);
+
+    m.controller('ctrl', ['$scope', 'videoServer', '$filter', ($scope, videoServer, $filter) => {
+
+        videoServer.get().then((response) => {
+            $scope.data = response;
+        });
+
+    }]);
+
+</script>
+
+</body>
+</html>

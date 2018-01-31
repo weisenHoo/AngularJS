@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <!--<script src="../org/angular.min.js"></script>-->
+
+    <style>
+        .ng-cloak{
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<!--绑定控制器-->
+<div ng-controller="ctrl">
+    {{name}}
+    <hr>
+    {{links[0].name+":"+links[0].url}}
+    <hr>
+    {{num*8}}
+    <hr>
+    <h3 ng-bind="name"></h3>
+</div>
+<script src="../org/angular.min.js"></script>
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        $scope.name = "后盾网";
+        $scope.num = 2;
+        $scope.links = [
+            {id: 0, name: "后盾人", url: "http://www.houdunren.com"},
+            {id: 0, name: "后盾网", url: "http://www.houdunwang.com"},
+            {id: 0, name: "后盾网论坛", url: "http://bbs.houdunwang.com"},
+        ];
+    }]);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    {{data}}
+    <hr/>
+    {{data|limitTo:2}}
+    <hr/>
+    {{data|limitTo:2:1}}
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+
+        $scope.data = "后盾网、后盾人 人人做后盾、北京PHP培训";
+
+    }]);
+
+</script>
+
+</body>
+</html>

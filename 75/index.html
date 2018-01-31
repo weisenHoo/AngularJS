@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+    <script src="../org/angular-ui-router.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    <h1>{{name}}(单页面应用)</h1>
+    <hr>
+    <a href="" ui-sref="home2">首页</a>
+    <a href="#!/lists">列表页</a>
+    <div ui-view>后盾人提示你：你访问的页面不存在！</div>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', ['ui.router']);
+
+    // 类似于够着函数，在起始时执行
+    m.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
+        // 默认路由
+        $urlRouterProvider.otherwise('');
+        // 定义路由规则
+        $stateProvider
+            .state('default', {
+                url: '',
+                template: '<h1>后盾人</h1>',
+            })
+            .state('home2', {
+                url: '/home',
+                template: '<h1>首页</h1>',
+            })
+            .state('lists', {
+                url: '/lists',
+                template: '<h1>列表页</h1>',
+            })
+    }]);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+
+        $scope.name = 'SPA: SINGLE PAGE APPLICATION';
+
+    }]);
+
+</script>
+
+</body>
+</html>

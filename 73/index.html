@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    <h1>{{name}}(单页面应用)</h1>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+
+        $scope.name = 'SPA: SINGLE PAGE APPLICATION';
+
+    }]);
+
+</script>
+
+</body>
+</html>

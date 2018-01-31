@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd">
+
+    <hd-cms></hd-cms>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.directive('hdCms', [() => {
+        return {
+            restrict: 'E',
+            replace: true,
+            templateUrl: './view/57.html',
+            controller: ['$scope', ($scope) => {
+                $scope.data = [
+                    {id: 0, name: '后盾人'},
+                    {id: 1, name: '后盾网'},
+                    {id: 2, name: '后盾网论坛'},
+                ];
+            }],
+        };
+    }]);
+
+</script>
+
+</body>
+</html>

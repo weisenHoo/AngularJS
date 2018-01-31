@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    {{time}}
+    <hr/>
+    {{time|date:"yyyy年MM月dd日 HH:mm:ss"}}
+    <hr/>
+    {{time|date:"yyyy/MM/dd HH:mm:ss"}}
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+
+        // getTime() 转换为时间戳
+        $scope.time = new Date().getTime();
+
+    }]);
+
+</script>
+
+</body>
+</html>

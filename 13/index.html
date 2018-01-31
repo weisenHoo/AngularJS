@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<!--绑定控制器-->
+<div ng-controller="ctrl">
+
+    {{data}}
+
+</div>
+
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        var obj = {name: "后盾网"};
+        angular.extend(obj, {url: "http://www.houdunwang.com", web: "后盾人"});// 对象或数组合并
+        console.log(obj);
+
+        $scope.data = [
+            {name: "后盾人", url: "houdunren.com"},
+            {name: "后盾网", url: "houdunwang.com"},
+            {name: "后盾网论坛", url: "houdunwang.com"},
+        ];
+        // 遍历对象或数组中的每一个元素并执行一个函数
+        angular.forEach($scope.data, (v, k) => {
+            console.log(k + ":" + v.name);
+            v.url = (v.name=="后盾网论坛"?"http://bbs.":"http://www.") + v.url;
+        });
+    }]);
+
+</script>
+
+</body>
+</html>

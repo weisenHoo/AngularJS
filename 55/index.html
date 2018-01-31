@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    <input type="text" ng-model="name">
+    <h1 hdcms hd-color="name"></h1>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.directive('hdcms', [() => {
+        return {
+            restrict: 'AEC',
+            // = 双向文本绑定
+            // 直接取控制器中变量的值
+            scope: {color: '=hdColor'},
+            template: '<hr/>{{color}}<hr/><span style="color: {{color}};">后盾人</span><hr/><input type="text" ng-model="color"/>',
+        };
+    }]);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+        $scope.name = 'red';
+    }]);
+
+</script>
+
+</body>
+</html>

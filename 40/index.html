@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    <table border="1" width="600">
+        <tr>
+            <td ng-click="orderBy('id')">编号</td>
+            <td ng-click="orderBy('click')">点击数</td>
+            <td ng-click="orderBy('title')">标题</td>
+            <td ng-click="orderBy('url')">链接地址</td>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td ng-bind="v.id"></td>
+            <td ng-bind="v.click"></td>
+            <td ng-bind="v.title"></td>
+            <td ng-bind="v.url"></td>
+        </tr>
+    </table>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', '$filter', ($scope, $filter) => {
+
+        $scope.data = [
+            {id: 0, click: 100, title: "后盾网", url: "http://www.houdunwang.com"},
+            {id: 1, click: 300, title: "后盾网论坛", url: "http://bbs.houdunwang.com"},
+            {id: 2, click: 200, title: "后盾人", url: "http://www.houdunren.com"},
+        ];
+
+        $scope.orderBy = function (field) {
+            // 使用箭头函数无效果
+            if (arguments.callee[field] == undefined) {
+                arguments.callee[field] = false;
+            }
+            arguments.callee[field] = !arguments.callee[field];
+            $scope.data = $filter("orderBy")($scope.data, field, arguments.callee[field]);
+        };
+
+    }]);
+
+</script>
+
+</body>
+</html>

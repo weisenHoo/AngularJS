@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <link rel="stylesheet" href="../org/bootstrap.min.css">
+    <link rel="stylesheet" href="../org/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+
+        /*-*/
+        .mobile {
+            border: 1px solid #999;
+            height: 500px;
+
+            display: flex;
+        }
+
+        .mobile dl {
+            margin: 0;
+            padding: 0;
+
+            display: flex; /*弹性盒模型*/
+            flex: 1; /*平均分配*/
+            flex-direction: column-reverse; /*纵向反转*/
+        }
+
+        .mobile dl dt {
+            background: #999;
+            color: #fff;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #f3f3f3;
+            cursor: pointer;
+            line-height: 2em;
+        }
+
+        .mobile dl dd {
+            display: flex;
+            flex-direction: column; /*纵向排列*/
+        }
+
+        .mobile dl dd a {
+            border: 1px solid #f3f3f3;
+            text-align: center;
+            padding: 6px 0px;
+            text-decoration: none;
+        }
+
+        .top-menu,
+        .sub-menu {
+            position: relative;
+        }
+
+        .top-menu .top-fa,
+        .sub-menu .sub-fa {
+            display: none;
+            position: absolute;
+            right: -8px;
+            top: -8px;
+
+            color: #999;
+            cursor: pointer;
+        }
+
+        .top-menu .top-fa:hover,
+        .sub-menu .sub-fa:hover {
+            color: #f00;
+        }
+
+        .top-menu:hover .top-fa,
+        .sub-menu:hover .sub-fa {
+            display: block;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    <form action="" method="post" class="form-horizontal" role="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 app">
+                    <div class="mobile">
+                        <dl ng-repeat="v in data.button">
+                            <dt ng-bind="v.name"></dt>
+                            <dd>
+                                <a ng-repeat="sub in v.sub_button" href="" ng-bind="sub.name"></a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">编辑</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!--一级菜单开始-->
+                            <div class="panel panel-default top-menu" ng-repeat="v in data.button">
+                                <i class="fa fa-times-circle fa-lg top-fa"></i>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">标题</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="v.name">
+                                        </div>
+                                    </div>
+                                    <div ng-hide="v.sub_button">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">类型</label>
+                                            <div class="col-sm-10">
+                                                <label class="radio-inline">
+                                                    <input type="radio" value="click" ng-model="v.type"> 关键词
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" value="view" ng-model="v.type"> 网址
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" value="miniprogram" ng-model="v.type"> 小程序
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="v.type=='click'">
+                                            <label class="col-sm-2 control-label">关键词</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" ng-model="v.key">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="v.type=='view' || v.type=='miniprogram'">
+                                            <label class="col-sm-2 control-label">链接</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" ng-model="v.url">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="v.type=='miniprogram'">
+                                            <label class="col-sm-2 control-label">appid</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" ng-model="v.appid">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="v.type=='miniprogram'">
+                                            <label class="col-sm-2 control-label">路径</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" ng-model="v.pagepath">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--二级菜单开始-->
+                                    <div class="panel panel-default sub-menu" ng-repeat="sub in v.sub_button">
+                                        <i class="fa fa-times-circle fa-lg sub-fa"></i>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">标题</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" ng-model="sub.name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">类型</label>
+                                                <div class="col-sm-10">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" value="click" ng-model="sub.type"> 关键词
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" value="view" ng-model="sub.type"> 网址
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" value="miniprogram" ng-model="v.type"> 小程序
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="sub.type=='click'">
+                                                <label class="col-sm-2 control-label">关键词</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" ng-model="sub.key">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="sub.type=='view' || sub.type=='miniprogram'">
+                                                <label class="col-sm-2 control-label">链接</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" ng-model="sub.url">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="sub.type=='miniprogram'">
+                                                <label class="col-sm-2 control-label">appid</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" ng-model="sub.appid">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="sub.type=='miniprogram'">
+                                                <label class="col-sm-2 control-label">路径</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" ng-model="sub.pagepath">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--二级菜单结束-->
+                                    <button type="button" class="btn btn-info" ng-click="addSubButton(v)">添加菜单</button>
+                                </div>
+                            </div>
+                            <!--一级菜单结束-->
+                            <button type="button" class="btn btn-success" ng-click="addTopButton()">添加一级菜单</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+
+        $scope.data = {
+            "button": [
+                {
+                    "type": "click",
+                    "name": "今日歌曲",
+                    "key": "V1001_TODAY_MUSIC"
+                },
+                {
+                    "name": "菜单",
+                    "sub_button": [
+                        {
+                            "type": "view",
+                            "name": "搜索",
+                            "url": "http://www.soso.com/"
+                        },
+                        {
+                            "type": "miniprogram",
+                            "name": "wxa",
+                            "url": "http://mp.weixin.qq.com",
+                            "appid": "wx286b93c14bbf93aa",
+                            "pagepath": "pages/lunar/index"
+                        },
+                        {
+                            "type": "click",
+                            "name": "赞一下我们",
+                            "key": "V1001_GOOD"
+                        }]
+                }]
+        };
+
+        // 添加一级菜单按钮
+        $scope.addTopButton = () => {
+            let menu = {
+                "type": "view",
+                "name": "",
+            };
+            if ($scope.data.button.length >= 3) {
+                alert("一级菜单最多为三个");
+            } else {
+                $scope.data.button.push(menu);
+            }
+        };
+
+        // 添加子菜单按钮
+        $scope.addSubButton = (item) => {
+            let menu = {
+                "type": "view",
+                "name": "",
+            };
+            if (!item.sub_button) {
+                item.sub_button = [];
+            }
+            if (item.sub_button.length >= 5) {
+                alert("一级菜单最多为五个");
+            } else {
+                item.sub_button.push(menu);
+            }
+        };
+
+    }]);
+
+</script>
+
+</body>
+</html>

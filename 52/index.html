@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd">
+
+    <!--继承隔离-->
+    <div ng-controller="ctrl1">
+        {{data.name}}
+        <input type="text" ng-model="name">
+        <div ng-controller="ctrl2">
+            {{data.name}}
+            <input type="text" ng-model="data.name">
+        </div>
+        <div ng-controller="ctrl2">
+            {{data.name}}
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl1', ['$scope', ($scope) => {
+        $scope.data = {name: '后盾人'};
+    }]);
+
+    m.controller('ctrl2', ['$scope', ($scope) => {
+    }]);
+
+    m.controller('ctrl2', ['$scope', ($scope) => {
+    }]);
+
+
+</script>
+
+</body>
+</html>

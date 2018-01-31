@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    <hd-tab data="data"></hd-tab>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+        $scope.data = [
+            {
+                id: 0,
+                title: '培训',
+                data: [
+                    {id: 0, name: '后盾人'},
+                    {id: 1, name: '后盾网'},
+                    {id: 2, name: '后盾网论坛'},
+                ]
+            },
+            {
+                id: 2,
+                title: '开源产品',
+                data: [
+                    {id: 0, name: 'HDPHP'},
+                    {id: 1, name: 'HDCMS'},
+                    {id: 2, name: 'HDJS'},
+                ]
+            },
+        ];
+    }]);
+
+    m.directive('hdTab', [() => {
+        return {
+            restrict: 'E',
+            templateUrl: './view/59.html',
+            scope: {
+                data: '=',
+            },
+            link: (scope, elem, attr) => {
+                $(elem).delegate('a', 'click', function () {
+                    $(this).addClass('active').siblings('a').removeClass('active');
+
+                    // 查找a元素出现的位置
+                    let index = $(this).index();
+                    $(elem).find('div.lists').hide().eq(index - 1).show();
+                });
+            },
+//            controller: ['$scope', ($scope) => {
+//                $scope.data = [
+//                    {
+//                        id: 0,
+//                        title: '培训',
+//                        data: [
+//                            {id: 0, name: '后盾人'},
+//                            {id: 1, name: '后盾网'},
+//                            {id: 2, name: '后盾网论坛'},
+//                        ]
+//                    },
+//                    {
+//                        id: 2,
+//                        title: '开源产品',
+//                        data: [
+//                            {id: 0, name: 'HDPHP'},
+//                            {id: 1, name: 'HDCMS'},
+//                            {id: 2, name: 'HDJS'},
+//                        ]
+//                    },
+//                ];
+//            }],
+        };
+    }]);
+
+</script>
+
+</body>
+</html>

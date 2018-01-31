@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<!--绑定控制器-->
+<div ng-controller="ctrl">
+
+    游戏：<input type="checkbox" ng-model="data.game" ng-true-value="1" ng-false-value="0">
+    电影：<input type="checkbox" ng-model="data.video" ng-true-value="1" ng-false-value="0">
+    <div ng-show="data.game">
+        <h1>游戏：</h1>
+        <textarea name="" cols="30" rows="10"></textarea>
+    </div>
+    <div ng-show="data.video">
+        <h1>电影：</h1>
+        <textarea name="" cols="30" rows="10"></textarea>
+    </div>
+</div>
+
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        $scope.data = {game: 0, video: 0};
+    }]);
+
+</script>
+
+</body>
+</html>

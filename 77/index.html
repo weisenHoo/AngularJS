@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+    <script src="../org/angular-ui-router.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd">
+
+    <a href="" ui-sref="home">首页</a>
+    <a href="" ui-sref="lists">列表页</a>
+    <div ui-view>后盾人提示你：你访问的页面不存在！</div>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', ['ui.router']);
+
+    // 定义服务
+    m.service('videoServer', ['$http', function ($http) {
+
+        this.get = () => {
+            return $http({method: 'get', url: '1.php'}).then((response) => {
+                return response.data
+            });
+        };
+
+    }]);
+
+    // 类似于够着函数，在起始时执行
+    m.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
+        // 默认路由
+        $urlRouterProvider.otherwise('');
+        // 定义路由规则
+        $stateProvider
+            .state('default', {
+                url: '',
+                templateUrl: './view/hd.html',
+            })
+            .state('home', {
+                url: '/home',
+                templateUrl: './view/home.html',
+                // 路由控制器必须使用function定义回调函数
+                controller: 'ctrl',
+            })
+            .state('lists', {
+                url: '/lists',
+                templateUrl: 'view/lists.html',
+                controller: ['$scope', 'videoServer', function ($scope, videoServer) {
+                    videoServer.get().then((response) => {
+                        $scope.data = response;
+                    });
+                }],
+            })
+    }]);
+
+    m.controller('ctrl', ['$scope', function ($scope) {
+
+        $scope.name = 'SPA: SINGLE PAGE APPLICATION';
+
+    }]);
+
+</script>
+
+</body>
+</html>

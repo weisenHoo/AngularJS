@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    <table border="1" width="500">
+        <tr>
+            <td>
+                <label>
+                    <input type="checkbox" ng-model="all">
+                    <span ng-bind="all?'取消':'全选'"></span>
+                </label>
+            </td>
+            <td>标题</td>
+            <td>网址</td>
+        </tr>
+        <tr ng-repeat="(k,v) in data">
+            <td><input type="checkbox" ng-checked="all"></td>
+            <td>{{v.name}}</td>
+            <td>{{v.url}}</td>
+        </tr>
+    </table>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+
+        $scope.data = [
+            {name: "HDPHP", url: "http://doc.hdphp.com"},
+            {name: "HDCMS", url: "http://www.hdcms.com"},
+            {name: "HDJS", url: "http://hdjs.hdphp.com"},
+            {name: "后盾人", url: "http://www.houdunren.com"},
+            {name: "后盾网", url: "http://www.houdunwang.com"},
+            {name: "后盾网论坛", url: "http://bbs.houdunwang.com"},
+        ];
+
+        $scope.c = [];
+
+    }]);
+
+</script>
+
+</body>
+</html>

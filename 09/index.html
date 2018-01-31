@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<!--绑定控制器-->
+<div ng-controller="ctrl">
+
+    网站开启：
+    <input type="radio" ng-model="status" ng-value="1">开启
+    <input type="radio" ng-model="status" ng-value="0">关闭
+    {{status}}
+    <div ng-show="!status">
+        <h2>关闭原因：</h2>
+        <textarea>网站正在维护中，下午2:00反问...</textarea>
+    </div>
+
+</div>
+
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        $scope.status = 0;
+    }]);
+
+</script>
+
+</body>
+</html>

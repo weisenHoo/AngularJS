@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    {{html}}
+    <hr>
+    <div ng-bind-html="html"></div>
+    <hr>
+    <div ng-bind-html="title|trustHtml"></div>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.filter('trustHtml', ['$sce', ($sce) => {
+        return (data) => {
+            return $sce.trustAsHtml(data);
+        };
+    }]);
+
+    m.controller('ctrl', ['$scope', '$sce', ($scope, $sce) => {
+
+        $scope.html = $sce.trustAsHtml('<h1 style="color:red;">后盾人 人人做后盾!</h1>');
+
+        $scope.title = '<h3 style="color:red;">后盾人 人人做后盾!</h3>';
+
+    }]);
+
+</script>
+
+</body>
+</html>

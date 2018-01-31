@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd">
+
+    <hd-cms color="blue">后盾人 人人做后盾！</hd-cms>
+    <hr>
+    <div hd-cms color="red">后盾人 人人做后盾！</div>
+    <hr>
+    <div class="hd-cms" color="green">后盾人 人人做后盾！</div>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    // 指令是属于模块的，需要在模块下面定义
+    // 驼峰命名规范
+    m.directive('hdCms', [() => {
+        return {
+            restrict: 'EAC',// a attr  e element  c class
+            template: (elem, attr) => "<h1 style='color: " + attr.color + ";'>" + $(elem).html() + "</h1>",
+            replace: true,
+        };
+    }]);
+
+</script>
+
+</body>
+</html>

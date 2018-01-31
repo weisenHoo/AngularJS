@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <!--<script src="../org/angular.min.js"></script>-->
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<!--绑定控制器-->
+<div ng-controller="ctrl">
+    <form action="1.php" method="post">
+        <label><strong>账号：</strong><input type="text" name="username" ng-model="username">{{username}}</label>
+        <label><strong>密码：</strong><input type="password" name="password" ng-model="password">{{password}}</label>
+        <label><strong></strong><input type="submit" value="提交"></label>
+    </form>
+</div>
+<script src="../org/angular.min.js"></script>
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        $scope.username = "weisen";
+        $scope.password = "weisen33";
+    }]);
+
+</script>
+
+</body>
+</html>

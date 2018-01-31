@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<ul id="data"></ul>
+
+<script>
+
+    //    alert($);
+
+    $.get('01.php', function (res) {
+        console.log(res);
+
+        res.forEach(function (v) {
+            let html = "<li><a target='_blank' href='" + v.url + "'>" + v.name + "</a></li>";
+            $("#data").append(html);
+        })
+    }, 'json')
+
+</script>
+
+</body>
+</html>

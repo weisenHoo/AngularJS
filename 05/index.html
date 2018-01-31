@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+</head>
+<body ng-app="hd">
+
+<!--绑定控制器-->
+<div ng-controller="ctrl">
+    商品名称：{{data.goods.title}} <br/>
+    价格：{{data.goods.price}} <br/>
+    购买总量：{{data.goods.num}} <br/>
+    总计：{{data.goods.price*data.goods.num}} <br/>
+    <button ng-click="data.add()">增加</button>
+    <button ng-click="data.reduce()">减少</button>
+</div>
+
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        $scope.data = {
+            goods: {title: "apple mac", price: 18888, num: 0, stock: 12},
+            add: function () {
+                var _this = this;
+                _this.goods.num=Math.min(++_this.goods.num,_this.goods.stock);
+            },
+            reduce: function () {
+                var _this = this;
+                _this.goods.num = Math.max(--_this.goods.num, 0);
+            },
+        };
+    }]);
+
+</script>
+
+</body>
+</html>

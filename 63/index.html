@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    <!--<a href="" ng-click="get()">get</a>-->
+    <!--<hr>-->
+    <!--{{message}}-->
+
+    <a href="" ng-click="getClientHeight()">获取内容高度</a>
+    内容高度是：{{clientHeight}}
+    <hr>
+    <a href="" ng-click="getScrollHeight()">获取内容显示区域高度</a>
+    内容显示区域高度是：{{scrollHeight}}
+    <hr>
+    <a href="" ng-click="prompt()">请输入内容</a>
+    您输入的内容是：{{content}}
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', '$window', ($scope, $window) => {
+
+//        $scope.get = () => {
+//            if ($window.confirm('确定要删除吗？')) {
+//                $scope.message = '删除成功';
+//            } else {
+//                $scope.message = '取消删除了';
+//            }
+//        };
+
+        $scope.getClientHeight = () => {
+            $scope.clientHeight = $window.document.body.clientHeight;
+        };
+
+        $scope.getScrollHeight = () => {
+            $scope.scrollHeight = $window.document.body.scrollHeight;
+        };
+
+        $scope.prompt = () => {
+            $scope.content = $window.prompt('请输入内容');
+        };
+
+
+    }]);
+
+</script>
+
+</body>
+</html>

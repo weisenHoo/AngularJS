@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    {{name}}
+    <hr>
+    {{time|date:"yyyy/MM/dd HH:mm:ss"}}
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', '$timeout', '$interval', ($scope, $timeout, $interval) => {
+        $scope.name = '后盾人';
+        $scope.time = new Date().getTime();
+
+        // 原生
+//        setTimeout(() => {
+//            $scope.name = 'http://www.houdunren.com';
+//            $scope.$apply();
+//        }, 2000);
+
+        let itemId = $timeout(() => {
+            $scope.name = '后盾人 人人做后盾！';
+        }, 2000);
+
+        $timeout.cancel(itemId);
+
+        itemId = $interval(() => {
+            $scope.time = new Date().getTime();
+        }, 1000);
+
+        $timeout(() => {
+            $interval.cancel(itemId);
+        }, 5000);
+    }]);
+
+</script>
+
+</body>
+</html>

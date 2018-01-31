@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    {{data|orderBy:"id":true}}
+    <hr/>
+    {{data|orderBy:"click":true}}
+    <hr/>
+    {{data|filter:"人"}}
+    <hr/>
+    {{data|filter:"后盾人":true}}<!--完全匹配-->
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+
+        $scope.data = [
+            {id: 0, click: 100, title: "后盾网", url: "http://www.houdunwang.com"},
+            {id: 1, click: 300, title: "后盾网论坛", url: "http://bbs.houdunwang.com"},
+            {id: 2, click: 200, title: "后盾人", url: "http://www.houdunren.com"},
+        ];
+
+    }]);
+
+</script>
+
+</body>
+</html>

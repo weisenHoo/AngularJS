@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    <h1 hdcms hd-color="callBack()"></h1>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.directive('hdcms', [() => {
+        return {
+            restrict: 'AEC',
+            // 调用父级里面的函数
+            scope: {color: '&hdColor'},
+            template: '<h3>{{color()}}</h3>',
+        };
+    }]);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+        $scope.callBack = () => {
+            return '后盾人';
+        };
+    }]);
+
+</script>
+
+</body>
+</html>

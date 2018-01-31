@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    <ul>
+        <!--{{first}} 第一个  {{$last}} 最后一个  {{middle}} 中间的  {{$even}} 偶数行  {{$odd}} 奇数行-->
+        <li ng-repeat="(k,v) in data">
+            {{k}}:<a style="{{$first?'color:#f00':''}}" target="_blank" href="{{v.url}}">{{v.name}}</a>
+        </li>
+        <hr/>
+        <li ng-repeat="(k,v) in data">
+            <span ng-if="$first" style="{{$first?'color:red':''}}">名称：{{v.name}}&nbsp;&nbsp;&nbsp;&nbsp;网址：{{v.url}}</span>
+            <span ng-if="$middle">名称：{{v.name}}&nbsp;&nbsp;&nbsp;&nbsp;网址：{{v.url}}</span>
+            <span ng-if="$last" style="{{$last?'color:green':''}}">名称：{{v.name}}&nbsp;&nbsp;&nbsp;&nbsp;网址：{{v.url}}</span>
+        </li>
+        <hr/>
+        <!--把$index变为遍历唯一的值-->
+        <li ng-repeat="v in data2 track by $index">
+            {{v}}
+        </li>
+    </ul>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+
+        $scope.data = [
+            {name: "HDPHP", url: "http://doc.hdphp.com"},
+            {name: "HDCMS", url: "http://www.hdcms.com"},
+            {name: "HDJS", url: "http://hdjs.hdphp.com"},
+            {name: "后盾人", url: "http://www.houdunren.com"},
+            {name: "后盾网", url: "http://www.houdunwang.com"},
+            {name: "后盾网论坛", url: "http://bbs.houdunwang.com"},
+        ];
+
+        $scope.data2 = ["后盾人", "后盾网", "后盾网论坛", "HDPHP", "HDPHP"];
+
+    }]);
+
+</script>
+
+</body>
+</html>

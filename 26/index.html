@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <link rel="stylesheet" href="../org/bootstrap.min.css">
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+
+        /*-*/
+        .mobile {
+            border: 1px solid #999;
+            height: 500px;
+
+            display: flex;
+        }
+
+        .mobile dl {
+            margin: 0;
+            padding: 0;
+
+            display: flex; /*弹性盒模型*/
+            flex: 1; /*平均分配*/
+            flex-direction: column-reverse; /*纵向反转*/
+        }
+
+        .mobile dl dt {
+            background: #999;
+            color: #fff;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #f3f3f3;
+            cursor: pointer;
+            line-height: 2em;
+        }
+
+        .mobile dl dd {
+            display: flex;
+            flex-direction: column; /*纵向排列*/
+        }
+
+        .mobile dl dd a {
+            border: 1px solid #f3f3f3;
+            text-align: center;
+            padding: 6px 0px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    <form action="" method="post" class="form-horizontal" role="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 app">
+                    <div class="mobile">
+                        <dl>
+                            <dt>游戏</dt>
+                            <dd>
+                                <a href="">跳一跳</a>
+                                <a href="">神魔之塔</a>
+                                <a href="">高达VS</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>电影</dt>
+                            <dd>
+                                <a href="">复仇者联盟</a>
+                                <a href="">雷神</a>
+                                <a href="">正义联盟</a>
+                                <a href="">钢铁侠</a>
+                                <a href="">超人</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>其他</dt>
+                            <dd>
+                                <a href="">个人中心</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">编辑</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-2 control-label">标题</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-2 control-label">链接</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="" class="col-sm-2 control-label">标题</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="" class="col-sm-2 control-label">链接</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-info">添加菜单</button>
+                                </div>
+                            </div>
+                            <button class="btn btn-success">添加一级菜单</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+
+
+    }]);
+
+</script>
+
+</body>
+</html>

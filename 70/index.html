@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd" ng-controller="ctrl">
+
+    <table border="1" width="600">
+        <tr>
+            <td align="center">编号</td>
+            <td>标题</td>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td align="center">{{v.aid}}</td>
+            <td>{{v.title}}</td>
+        </tr>
+    </table>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    // 定义服务
+    m.factory('videoServer', ['$http', ($http) => {
+        return {
+//            get: (callback) => {
+//                $http({url: '1.php'}).then((response) => {
+//                    callback(response);
+//                });
+//            },
+            all: () => {
+                return $http({url: '1.php'});
+            },
+        };
+    }]);
+
+    m.controller('ctrl', ['$scope', 'videoServer', ($scope, videoServer) => {
+
+//        videoServer.get((response) => {
+//            $scope.data = response.data;
+//        });
+
+        videoServer.all().then((response) => {
+            $scope.data = response.data;
+        });
+
+    }]);
+
+</script>
+
+</body>
+</html>

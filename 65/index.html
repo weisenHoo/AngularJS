@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd">
+
+    <div ng-controller="ctrl">
+
+        {{name}}
+
+    </div>
+    <hr>
+    <div ng-controller="ctrl2">
+
+        {{name}}
+
+    </div>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', '$cacheFactory', ($scope, $cacheFactory) => {
+
+        let data = [
+            {id: 0, name: '后盾人', url: 'www.houdunren.com'},
+            {id: 1, name: '后盾网', url: 'www.houdunwang.com'},
+            {id: 2, name: '后盾网论坛', url: 'bbs.houdunwang.com'},
+        ];
+        let obj = $cacheFactory('hdphp');
+        // sessionStorage  localStorage
+        obj.put('web', data);
+        obj.put('user', {id: 0, username: 'weisen', age: 28});
+        // 删除缓存数据
+//        obj.remove('web');// 删一条数据
+//        obj.removeAll();// 删多条数据
+//        obj.distroy();// 删除表
+        // 获取缓存数据
+//        console.log(obj.get('web'));
+        console.log(obj.get('user'));
+        $scope.name = obj.get('user').username;
+
+    }]);
+
+    m.controller('ctrl2', ['$scope', '$cacheFactory', ($scope, $cacheFactory) => {
+        let obj = $cacheFactory.get('hdphp');
+        $scope.name = obj.get('user').username;
+
+    }]);
+
+</script>
+
+</body>
+</html>

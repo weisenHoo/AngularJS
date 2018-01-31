@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    搜索：<input type="text" ng-model="search">
+    <br/><br/>
+    <table border="1" width="600">
+        <tr>
+            <td>编号</td>
+            <td>点击数</td>
+            <td>标题</td>
+        </tr>
+        <tr ng-repeat="(k,v) in data">
+            <td>{{v.id}}</td>
+            <td>{{v.name}}</td>
+            <td>{{v.mobile|truncate}}</td>
+        </tr>
+    </table>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.filter("truncate", () => {
+        return (mobile, len) => {
+            len = len ? len : 3;
+            return mobile.substr(0, 11 - len) + new String("*").repeat(len);
+        };
+    });
+
+    m.controller('ctrl', ['$scope', '$filter', ($scope, $filter) => {
+
+        $scope.data = [
+            {id: 0, name: "李小姐", mobile: "18689383003"},
+            {id: 1, name: "谭小姐", mobile: "15900073225"},
+            {id: 2, name: "卢小姐", mobile: "13318405879"},
+        ];
+
+    }]);
+
+</script>
+
+</body>
+</html>

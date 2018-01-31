@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" ng-app="hd">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+</head>
+<body>
+
+<!--绑定控制器-->
+<div ng-controller="ctrl">
+    {{name}}
+</div>
+
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        $scope.name = '后盾网';
+    }]);
+
+</script>
+
+</body>
+</html>

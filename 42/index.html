@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    <!--标题：<input type="text" ng-model="title">{{error}}-->
+    标题：<input type="text" ng-model="news.title">{{error}}
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', '$filter', ($scope, $filter) => {
+
+//        $scope.title = "";
+//        $scope.$watch("title", (n, o) => {
+//            console.log("新：" + n);
+//            console.log("旧：" + o);
+//
+//             $scope.error = n.length > 3 ? "标题长度不能超过3位" : "";
+//        });
+
+        // 监听对象
+        $scope.news = {title: ""};
+        $scope.$watch("news", (n, o) => {
+            console.log(n);
+            $scope.error = n.title.length > 3 ? "标题长度不能超过3位" : "";
+        }, true);
+
+    }]);
+
+</script>
+
+</body>
+</html>

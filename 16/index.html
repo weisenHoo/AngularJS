@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<!--绑定控制器-->
+<div ng-controller="ctrl" ng-init="name='后盾人'+'后盾网论坛'">
+
+    <!--{{name}}-->
+
+    <form action="1.php" method="post">
+        标题：<input type="text" name="title" ng-trim="false" ng-model="title" placeholder="请输入内容"/>&nbsp;&nbsp;
+        <!--input表单type设置成password，空格不会清除-->
+        密码：<input type="password" name="passeord" placeholder="请输入密码"/>&nbsp;&nbsp;
+        <input type="text" name="data"/>
+        <input type="submit" value="提交"/>
+    </form>
+    {{title}}
+
+</div>
+
+<script>
+
+    // 定义模块
+    var m = angular.module('hd', []);
+
+    // 定义控制器
+    // 从IOC容器中把$scope这个模型依赖注入到控制器中
+    m.controller('ctrl', ['$scope', ($scope) => {
+        // viewModel
+        $scope.title = "";
+        $("form").submit(() => {
+            $("[name='data']").val($scope.title);
+//            return false;
+        });
+    }]);
+
+</script>
+
+</body>
+</html>

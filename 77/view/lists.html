@@ -1,0 +1,15 @@
+<div>
+    <h1>列表页:{{name}}</h1>
+    <table border="1" width="600">
+        <tr>
+            <td align="center">编号</td>
+            <td>标题</td>
+            <td align="center">工具</td>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td align="center">{{v.aid}}</td>
+            <td>{{v.title}}</td>
+            <td align="center"><a target="_blank" href="{{v.imgUrl}}">查看图片</a></td>
+        </tr>
+    </table>
+</div>

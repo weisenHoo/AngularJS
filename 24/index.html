@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+
+<div ng-controller="ctrl">
+
+    <!--<div onclick="run()">HDPHP</div>-->
+    <!--<script>-->
+    <!--let run = () => {-->
+    <!--alert("HDPHP");-->
+    <!--}-->
+    <!--</script>-->
+
+    <div ng-click="show()">单击事件</div>
+    <div ng-dblclick="show()">双击事件</div>
+    <input type="text" ng-change="show()" ng-model="title" placeholder="内容改变时触发"><br/>
+    <input type="text" ng-blur="show()" ng-model="title" placeholder="失去焦点时触发"><br/>
+    <input type="text" ng-focus="show()" ng-model="title" placeholder="获取焦点时触发"><br/>
+    <input type="text" ng-keydown="show()" ng-model="title" placeholder="键盘按下时触发"><br/>
+    <input type="text" ng-keyup="show()" ng-model="title" placeholder="键盘抬起时触发"><br/>
+    <input type="text" ng-keypress="show()" ng-model="title" placeholder="键盘事件"><br/>
+    <input type="text" ng-mousedown="show()" ng-model="title" placeholder="鼠标按下事件"><br/>
+    <input type="text" ng-mouseup="show()" ng-model="title" placeholder="鼠标抬起事件"><br/>
+    <input type="text" ng-mouseenter="show()" ng-model="title" placeholder="鼠标进入事件"><br/>
+    <input type="text" ng-mouseleave="show()" ng-model="title" placeholder="鼠标移出事件"><br/>
+    <input type="text" ng-mousemove="show()" ng-model="title" placeholder="鼠标移动事件"><br/>
+    {{data}}
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.controller('ctrl', ['$scope', ($scope) => {
+        $scope.data = "";
+        $scope.show = () => {
+            $scope.data += "HDPHP";
+        };
+
+    }]);
+
+</script>
+
+</body>
+</html>

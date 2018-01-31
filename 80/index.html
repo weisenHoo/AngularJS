@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+    <script src="../org/angular-ui-router.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd">
+
+    <div ui-view></div>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', ['ui.router']);
+
+    // 类似于够着函数，在起始时执行
+    m.config(['$stateProvider', '$urlRouterProvider', ($stateProvider, $urlRouterProvider) => {
+        // 默认路由
+        $urlRouterProvider.otherwise('/home');
+        // 定义路由规则
+        $stateProvider
+            .state('home', {
+                url: '/home',
+                templateUrl: './view/home.html',
+                controller: 'ctrl',
+            })
+            .state('home.news', {
+                url: '/user',
+                template: '<h1>新闻</h1>',
+                controller: 'ctrl',
+            })
+            .state('game', {
+                parent: 'home',
+                url: '/game',
+                template: '<h1>游戏</h1>',
+                controller: 'ctrl',
+            })
+            .state('login', {
+                // parent: 'home',
+                url: '/login',
+                template: '<h1>登录</h1>',
+                controller: 'ctrl',
+            })
+    }]);
+
+    m.controller('ctrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
+
+
+    }]);
+
+</script>
+
+</body>
+</html>

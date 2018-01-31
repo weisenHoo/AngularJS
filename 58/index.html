@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../org/angular.min.js"></script>
+    <script src="../org/jquery.min.js"></script>
+</head>
+<body>
+
+<div ng-app="hd">
+
+    <hd-cms title="后盾人" bgcolor="red" fontcolor="#fff"></hd-cms>
+    <hd-cms title="后盾网" bgcolor="green" fontcolor="#fff"></hd-cms>
+    <hd-cms title="后盾网论坛" bgcolor="blue" fontcolor="#fff"></hd-cms>
+
+</div>
+
+<script>
+
+    var m = angular.module('hd', []);
+
+    m.directive('hdCms', [() => {
+        return {
+            restrict: 'E',
+            scope: {
+                title: '@',
+            },
+            link: (scope, elem, attr) => {
+                let style = {
+                    backgroundColor: attr.bgcolor,
+                    color: attr.fontcolor,
+                    // 扩展
+                    padding: '0px 10px',
+                };
+                $(elem).css(style).html(scope.title);
+            },
+        };
+    }]);
+
+</script>
+
+</body>
+</html>
